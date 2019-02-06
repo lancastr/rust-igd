@@ -8,7 +8,7 @@ use hyper;
 use tokio_timer::TimeoutError;
 use xml::reader::Error as XmlError;
 
-use soap;
+use crate::soap;
 
 /// Errors that can occur when sending the request to the gateway.
 #[derive(Debug)]

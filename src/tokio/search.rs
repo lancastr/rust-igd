@@ -12,9 +12,9 @@ use tokio_timer::Timer;
 use xml::reader::XmlEvent;
 use xml::EventReader;
 
-use errors::SearchError;
-use search::{parse_result, SEARCH_REQUEST};
-use tokio::Gateway;
+use crate::errors::SearchError;
+use crate::search::{parse_result, SEARCH_REQUEST};
+use crate::tokio::Gateway;
 
 /// Search gateway, bind to all interfaces and use a timeout of 3 seconds.
 ///
@@ -93,7 +93,7 @@ where
     };
 
     for e in parser.into_iter() {
-        match try!(e) {
+        match r#try!(e) {
             XmlEvent::StartElement { name, .. } => {
                 chain.push(name.borrow().to_repr());
                 let tail = if chain.len() >= 3 {

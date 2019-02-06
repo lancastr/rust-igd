@@ -3,17 +3,17 @@ use std::fmt;
 use std::hash::{Hash, Hasher};
 use std::net::{Ipv4Addr, SocketAddrV4};
 
-use errors::{AddAnyPortError, AddPortError, GetExternalIpError, RemovePortError, RequestError};
+use crate::errors::{AddAnyPortError, AddPortError, GetExternalIpError, RemovePortError, RequestError};
 use futures::future;
 use futures::Future;
 use rand;
-use soap;
+use crate::soap;
 use tokio_core::reactor::Handle;
 use tokio_retry::strategy::FixedInterval;
 use tokio_retry::{Error as RetryError, RetryIf};
 use xmltree;
 
-use PortMappingProtocol;
+use crate::PortMappingProtocol;
 
 /// This structure represents a gateway found by the search functions.
 #[derive(Clone, Debug)]

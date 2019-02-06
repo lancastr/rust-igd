@@ -9,6 +9,7 @@ documentation = "https://docs.rs/igd/"
 readme = "README.md"
 keywords = ["igd", "upnp"]
 license = "MIT"
+edition = "2018"
 
 [dependencies]
 regex = "0.2"
