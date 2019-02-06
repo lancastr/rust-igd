@@ -6,13 +6,14 @@
 
 extern crate futures;
 extern crate hyper;
+extern crate mime;
 extern crate rand;
 extern crate regex;
-extern crate tokio_core;
+extern crate tokio;
 extern crate tokio_retry;
-extern crate tokio_timer;
 extern crate xml;
 extern crate xmltree;
+#[macro_use] extern crate failure;
 
 // data structures
 pub use self::errors::{AddAnyPortError, AddPortError, GetExternalIpError, RemovePortError, RequestError, SearchError};
@@ -32,7 +33,6 @@ mod errors;
 mod gateway;
 mod search;
 mod soap;
-pub mod tokio;
 
 use std::fmt;
 

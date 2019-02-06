@@ -17,10 +17,8 @@ xml-rs = "0.7"
 xmltree = "0.7"
 rand = "0.4"
 futures = "0.1"
-tokio-core = "0.1"
-tokio-timer = "0.1"
-tokio-retry = "0.1"
-
-[dependencies.hyper]
-version = "0.11"
-default-features = false
+tokio = "0.1.15"
+tokio-retry = "0.2.0"
+mime = "0.3.13"
+hyper = "0.12"
+failure = "0.1.5"
