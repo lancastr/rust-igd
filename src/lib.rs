@@ -4,36 +4,35 @@
 
 #![deny(missing_docs)]
 
+extern crate futures;
 extern crate hyper;
+extern crate rand;
 extern crate regex;
+extern crate tokio_core;
+extern crate tokio_retry;
+extern crate tokio_timer;
 extern crate xml;
 extern crate xmltree;
-extern crate rand;
-extern crate futures;
-extern crate tokio_core;
-extern crate tokio_timer;
-extern crate tokio_retry;
 
 // data structures
+pub use self::errors::{AddAnyPortError, AddPortError, GetExternalIpError, RemovePortError, RequestError, SearchError};
 pub use self::gateway::Gateway;
-pub use self::errors::{SearchError, RequestError, GetExternalIpError, AddPortError,
-                       AddAnyPortError, RemovePortError};
 
 // search of gateway
 pub use self::search::search_gateway;
-pub use self::search::search_gateway_timeout;
 pub use self::search::search_gateway_from;
 pub use self::search::search_gateway_from_timeout;
+pub use self::search::search_gateway_timeout;
 
 // re-export error types
 pub use hyper::Error as HttpError;
 pub use xml::reader::Error as XmlError;
 
+mod errors;
 mod gateway;
 mod search;
 mod soap;
 pub mod tokio;
-mod errors;
 
 use std::fmt;
 

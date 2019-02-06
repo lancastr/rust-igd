@@ -1,10 +1,10 @@
-use std::net::{Ipv4Addr, SocketAddrV4};
 use std::fmt;
+use std::net::{Ipv4Addr, SocketAddrV4};
 use tokio_core::reactor::Core;
 
 use errors::{AddAnyPortError, AddPortError, GetExternalIpError, RemovePortError};
-use PortMappingProtocol;
 use tokio::Gateway as AsyncGateway;
+use PortMappingProtocol;
 
 /// This structure represents a gateway found by the search functions.
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
@@ -32,13 +32,7 @@ impl Gateway {
     /// # Returns
     ///
     /// The external address that was mapped on success. Otherwise an error.
-    pub fn get_any_address(
-        &self,
-        protocol: PortMappingProtocol,
-        local_addr: SocketAddrV4,
-        lease_duration: u32,
-        description: &str,
-    ) -> Result<SocketAddrV4, AddAnyPortError> {
+    pub fn get_any_address(&self, protocol: PortMappingProtocol, local_addr: SocketAddrV4, lease_duration: u32, description: &str) -> Result<SocketAddrV4, AddAnyPortError> {
         let mut core = Core::new().unwrap();
         let async = AsyncGateway::new(self.addr, self.control_url.clone(), core.handle());
         core.run(async.get_any_address(protocol, local_addr, lease_duration, description))
@@ -52,13 +46,7 @@ impl Gateway {
     /// # Returns
     ///
     /// The external port that was mapped on success. Otherwise an error.
-    pub fn add_any_port(
-        &self,
-        protocol: PortMappingProtocol,
-        local_addr: SocketAddrV4,
-        lease_duration: u32,
-        description: &str,
-    ) -> Result<u16, AddAnyPortError> {
+    pub fn add_any_port(&self, protocol: PortMappingProtocol, local_addr: SocketAddrV4, lease_duration: u32, description: &str) -> Result<u16, AddAnyPortError> {
         let mut core = Core::new().unwrap();
         let async = AsyncGateway::new(self.addr, self.control_url.clone(), core.handle());
         core.run(async.add_any_port(protocol, local_addr, lease_duration, description))
@@ -68,31 +56,14 @@ impl Gateway {
     ///
     /// The local_addr is the address where the traffic is sent to.
     /// The lease_duration parameter is in seconds. A value of 0 is infinite.
-    pub fn add_port(
-        &self,
-        protocol: PortMappingProtocol,
-        external_port: u16,
-        local_addr: SocketAddrV4,
-        lease_duration: u32,
-        description: &str,
-    ) -> Result<(), AddPortError> {
+    pub fn add_port(&self, protocol: PortMappingProtocol, external_port: u16, local_addr: SocketAddrV4, lease_duration: u32, description: &str) -> Result<(), AddPortError> {
         let mut core = Core::new().unwrap();
         let async = AsyncGateway::new(self.addr, self.control_url.clone(), core.handle());
-        core.run(async.add_port(
-            protocol,
-            external_port,
-            local_addr,
-            lease_duration,
-            description,
-        ))
+        core.run(async.add_port(protocol, external_port, local_addr, lease_duration, description))
     }
 
     /// Remove a port mapping.
-    pub fn remove_port(
-        &self,
-        protocol: PortMappingProtocol,
-        external_port: u16,
-    ) -> Result<(), RemovePortError> {
+    pub fn remove_port(&self, protocol: PortMappingProtocol, external_port: u16) -> Result<(), RemovePortError> {
         let mut core = Core::new().unwrap();
         let async = AsyncGateway::new(self.addr, self.control_url.clone(), core.handle());
         core.run(async.remove_port(protocol, external_port))
