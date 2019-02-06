@@ -7,7 +7,7 @@ use regex::Regex;
 
 use gateway::Gateway;
 use errors::SearchError;
-use async::get_control_url as get_control_url_async;
+use tokio::get_control_url as get_control_url_async;
 
 // Content of the request.
 pub const SEARCH_REQUEST: &'static str = "M-SEARCH * HTTP/1.1\r

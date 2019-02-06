@@ -25,12 +25,6 @@ pub use self::search::search_gateway_timeout;
 pub use self::search::search_gateway_from;
 pub use self::search::search_gateway_from_timeout;
 
-/// Contains Tokio compatible implementations for finding a gateway and configuring port mappings
-pub mod tokio {
-    pub use async::{Gateway, search_gateway_from_timeout, search_gateway_from,
-                    search_gateway_timeout, search_gateway};
-}
-
 // re-export error types
 pub use hyper::Error as HttpError;
 pub use xml::reader::Error as XmlError;
@@ -38,7 +32,7 @@ pub use xml::reader::Error as XmlError;
 mod gateway;
 mod search;
 mod soap;
-mod async;
+pub mod tokio;
 mod errors;
 
 use std::fmt;

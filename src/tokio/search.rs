@@ -12,7 +12,7 @@ use hyper;
 use xml::EventReader;
 use xml::reader::XmlEvent;
 
-use async::Gateway;
+use tokio::Gateway;
 use errors::SearchError;
 use search::{parse_result, SEARCH_REQUEST};
 
@@ -80,7 +80,7 @@ pub fn search_gateway_from_timeout(
     Box::new(timeout)
 }
 
-pub fn get_control_url(
+pub(crate) fn get_control_url(
     location: &(SocketAddrV4, String),
     handle: &Handle,
 ) -> Box<Future<Item = String, Error = SearchError>> {

@@ -4,7 +4,7 @@ use tokio_core::reactor::Core;
 
 use errors::{AddAnyPortError, AddPortError, GetExternalIpError, RemovePortError};
 use PortMappingProtocol;
-use async::Gateway as AsyncGateway;
+use tokio::Gateway as AsyncGateway;
 
 /// This structure represents a gateway found by the search functions.
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
