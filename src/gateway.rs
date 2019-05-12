@@ -1,7 +1,7 @@
 use rand::distributions::IndependentSample;
 use std::fmt;
 use std::hash::{Hash, Hasher};
-use std::net::{Ipv4Addr, SocketAddrV4};
+use std::net::{IpAddr, Ipv4Addr, SocketAddrV4};
 
 use crate::errors::{AddAnyPortError, AddPortError, GetExternalIpError, RemovePortError, RequestError};
 use futures::future;
@@ -30,6 +30,16 @@ impl Gateway {
             addr,
             control_url,
         }
+    }
+
+    /// get ip addr of the gateway
+    pub fn ip_addr(&self) -> IpAddr {
+        (*self.addr.ip()).into()
+    }
+
+    /// get control_url of the gateway
+    pub fn control_url(&self) -> String {
+        self.control_url.clone()
     }
 
     fn perform_request(&self, header: &str, body: &str, ok: &str) -> Box<Future<Item = (String, xmltree::Element), Error = RequestError>> {
